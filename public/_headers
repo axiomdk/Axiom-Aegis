@@ -1,0 +1,10 @@
+/
+  Cache-Control: no-store, no-cache, must-revalidate
+/index.html
+  Cache-Control: no-store, no-cache, must-revalidate
+/Axiom-Aegis.html
+  Cache-Control: no-store, no-cache, must-revalidate
+/sw.js
+  Cache-Control: no-store, no-cache, must-revalidate
+/manifest.json
+  Cache-Control: no-store, no-cache, must-revalidate

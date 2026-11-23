@@ -1,0 +1,324 @@
+@import "tailwindcss";
+
+:root {
+  /* 1. Root & Canvas Backgrounds — Pure Flat Black */
+  --bg-surface: #000000;
+  --bg-elevated: #000000;
+  --bg-canvas: #000000;
+  --bg-secondary: #000000;
+
+  /* 2. Multi-Column & Panel Architecture — Pure Flat Black */
+  --bg-sidebar: #000000;
+  --bg-column: #000000;
+  --bg-column-active: #000000;
+  --bg-column-header: #000000;
+  --bg-card: #000000;
+  --bg-card-hover: #000000;
+  --bg-inner: #000000;
+
+  /* 3. Dividers, Borders & Depth */
+  --border-subtle: #1E222B;
+  --border-column-header: #20242E;
+  --border-card: #232732;
+  --border-inner: #232732;
+  --shadow-elevated: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+
+  /* Custom Scrollbars */
+  --scrollbar-track: #000000;
+  --scrollbar-thumb: #262A35;
+  --scrollbar-thumb-hover: #373C4B;
+
+  /* Typography & Accent */
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #94A3B8;
+  --accent-primary: #E5A93C;
+  --accent-glow: rgba(229, 169, 60, 0.25);
+  --app-font-scale: 1;
+  --app-card-pad: 1.25rem;
+  --app-grid-gap: 1rem;
+}
+
+@layer base {
+  html {
+    font-size: calc(16px * var(--app-font-scale, 1));
+    transition: font-size 150ms ease;
+    color-scheme: dark;
+  }
+
+  html, body {
+    overflow-x: clip;
+    width: 100%;
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Semantic Axiom Aegis Pure Flat Black Architecture Classes */
+  .aa-theme-shell {
+    background-color: var(--bg-canvas) !important;
+    color: var(--text-primary);
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  button,
+  [role="button"],
+  a,
+  input,
+  select,
+  textarea {
+    touch-action: manipulation;
+  }
+
+  .pt-safe {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .pl-safe {
+    padding-left: env(safe-area-inset-left, 0px);
+  }
+  .pr-safe {
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+
+  .aa-sidebar-surface {
+    background-color: var(--bg-sidebar) !important;
+    border-color: var(--border-subtle);
+  }
+
+  .aa-header-surface {
+    background-color: var(--bg-canvas) !important;
+    border-bottom: 1px solid var(--border-column-header);
+  }
+
+  .aa-section-surface {
+    background-color: var(--bg-secondary) !important;
+    border: 1px solid var(--border-subtle);
+  }
+
+  .aa-column-surface {
+    background-color: var(--bg-column) !important;
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .aa-column-surface-active,
+  .aa-column-surface:focus-within {
+    background-color: var(--bg-column-active) !important;
+    border-color: var(--border-card);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .aa-column-header {
+    background-color: var(--bg-column-header) !important;
+    border-bottom: 1px solid var(--border-column-header);
+  }
+
+  .aa-card-inner {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-card);
+    transition: background-color 150ms ease, border-color 150ms ease;
+  }
+
+  .aa-card-inner:hover {
+    background-color: var(--bg-card-hover) !important;
+  }
+
+  /* Typography Cascade inside .aa-theme-shell */
+  .aa-theme-shell .text-white,
+  .aa-theme-shell .text-zinc-100,
+  .aa-theme-shell .text-zinc-200 {
+    color: var(--text-primary);
+  }
+
+  .aa-theme-shell .text-zinc-300,
+  .aa-theme-shell .text-zinc-400 {
+    color: var(--text-secondary);
+  }
+
+  /* Pure Flat Black Surface Cascade inside .aa-theme-shell */
+  /* 1. Root, Canvas, Header, Sidebar & Footer Backgrounds */
+  .aa-theme-shell > main,
+  .aa-theme-shell.bg-\[\#000000\],
+  .aa-theme-shell.bg-\[\#08090C\],
+  .aa-theme-shell .bg-\[\#000000\],
+  .aa-theme-shell .bg-\[\#08090C\],
+  .aa-theme-shell .bg-\[\#0A0B10\],
+  .aa-theme-shell .bg-\[\#0A0B10\]\/92,
+  .aa-theme-shell .bg-\[\#0B0D12\],
+  .aa-theme-shell .bg-\[\#0E1015\],
+  .aa-theme-shell .bg-\[\#0E1015\]\/60 {
+    background-color: var(--bg-canvas) !important;
+  }
+
+  /* 2. Column, Panel & Modal Containers */
+  .aa-theme-shell .bg-\[\#0D0F14\],
+  .aa-theme-shell .bg-\[\#0D0F16\],
+  .aa-theme-shell .bg-\[\#10131C\],
+  .aa-theme-shell .bg-\[\#111319\],
+  .aa-theme-shell .bg-\[\#11141E\],
+  .aa-theme-shell .bg-\[\#111520\],
+  .aa-theme-shell .bg-\[\#121215\],
+  .aa-theme-shell .bg-\[\#121214\],
+  .aa-theme-shell .bg-\[\#12141A\],
+  .aa-theme-shell .bg-\[\#12141C\],
+  .aa-theme-shell .bg-zinc-900\/60,
+  .aa-theme-shell .bg-zinc-900\/40 {
+    background-color: var(--bg-column) !important;
+    box-shadow: var(--shadow-elevated);
+  }
+
+  /* 3. Inner Column Cards, List Rows, Stat Cards & Inputs */
+  .aa-theme-shell .bg-\[\#09090b\],
+  .aa-theme-shell .bg-\[\#090B10\],
+  .aa-theme-shell .bg-\[\#0A0C10\],
+  .aa-theme-shell .bg-\[\#0A0C12\],
+  .aa-theme-shell .bg-\[\#0C0E13\],
+  .aa-theme-shell .bg-\[\#0C0E15\],
+  .aa-theme-shell .bg-\[\#13161F\],
+  .aa-theme-shell .bg-\[\#131722\],
+  .aa-theme-shell .bg-\[\#14161F\],
+  .aa-theme-shell .bg-\[\#141720\],
+  .aa-theme-shell .bg-\[\#141720\]\/90,
+  .aa-theme-shell .bg-\[\#151821\],
+  .aa-theme-shell .bg-\[\#151822\],
+  .aa-theme-shell .bg-\[\#181B24\],
+  .aa-theme-shell .bg-\[\#181B24\]\/60,
+  .aa-theme-shell .bg-\[\#181C28\],
+  .aa-theme-shell .bg-\[\#1A1D24\],
+  .aa-theme-shell .bg-\[\#1A1E29\],
+  .aa-theme-shell .bg-\[\#1F232E\],
+  .aa-theme-shell .bg-\[\#20242E\],
+  .aa-theme-shell .bg-\[\#202430\],
+  .aa-theme-shell .bg-\[\#202636\],
+  .aa-theme-shell .bg-\[\#222734\],
+  .aa-theme-shell .bg-\[\#222838\],
+  .aa-theme-shell .bg-\[\#232732\],
+  .aa-theme-shell .bg-zinc-900,
+  .aa-theme-shell .bg-zinc-900\/80,
+  .aa-theme-shell .bg-zinc-900\/90,
+  .aa-theme-shell .bg-zinc-950,
+  .aa-theme-shell .bg-zinc-950\/50,
+  .aa-theme-shell .bg-zinc-800,
+  .aa-theme-shell .bg-emerald-500\/10,
+  .aa-theme-shell .bg-emerald-500\/15,
+  .aa-theme-shell .bg-emerald-500\/20,
+  .aa-theme-shell .bg-sky-500\/10,
+  .aa-theme-shell .bg-blue-500\/10,
+  .aa-theme-shell .bg-purple-500\/10,
+  .aa-theme-shell .bg-purple-500\/15,
+  .aa-theme-shell .bg-purple-500\/20,
+  .aa-theme-shell .bg-cyan-500\/10,
+  .aa-theme-shell .bg-cyan-500\/15,
+  .aa-theme-shell .bg-cyan-500\/20,
+  .aa-theme-shell .bg-amber-500\/10,
+  .aa-theme-shell .bg-amber-500\/15,
+  .aa-theme-shell .bg-amber-500\/20,
+  .aa-theme-shell .bg-rose-500\/10,
+  .aa-theme-shell .bg-rose-500\/15,
+  .aa-theme-shell .bg-rose-500\/20 {
+    background-color: var(--bg-card) !important;
+  }
+
+  .aa-theme-shell .bg-\[\#121214\] .bg-\[\#09090b\]:hover,
+  .aa-theme-shell .bg-\[\#12141A\] .bg-\[\#090A0F\]:hover,
+  .aa-theme-shell .bg-\[\#111319\] .bg-\[\#181B24\]:hover {
+    background-color: var(--bg-card-hover) !important;
+  }
+
+  /* 4. Column Borders (#1E222B), Header Dividers (#20242E) & Card Borders (#232732) */
+  .aa-theme-shell .border-zinc-800,
+  .aa-theme-shell .border-zinc-800\/60,
+  .aa-theme-shell .border-zinc-800\/80,
+  .aa-theme-shell .border-zinc-800\/90,
+  .aa-theme-shell .border-\[\#1B202D\],
+  .aa-theme-shell .border-\[\#1C212E\],
+  .aa-theme-shell .border-\[\#1E222B\],
+  .aa-theme-shell .border-\[\#1E2330\],
+  .aa-theme-shell .border-\[\#20242E\],
+  .aa-theme-shell .border-\[\#222735\],
+  .aa-theme-shell .border-\[\#27272a\],
+  .aa-theme-shell .border-\[\#2A2E39\] {
+    border-color: var(--border-subtle);
+  }
+
+  .aa-theme-shell .border-\[\#18181b\],
+  .aa-theme-shell .border-\[\#232732\],
+  .aa-theme-shell .border-\[\#23293A\],
+  .aa-theme-shell .border-\[\#262B38\],
+  .aa-theme-shell .border-\[\#2A2F3D\],
+  .aa-theme-shell .border-\[\#2B3245\],
+  .aa-theme-shell .border-\[\#2C3448\],
+  .aa-theme-shell .border-\[\#2D3548\],
+  .aa-theme-shell .bg-\[\#181B24\].border,
+  .aa-theme-shell .bg-\[\#1A1D24\].border {
+    border-color: var(--border-card);
+  }
+
+  .aa-theme-shell .border-b.border-zinc-800,
+  .aa-theme-shell .border-b.border-zinc-800\/80,
+  .aa-theme-shell .border-b.border-\[\#1E2330\],
+  .aa-theme-shell .border-b.border-\[\#2A2E39\],
+  .aa-theme-shell .border-b.border-\[\#20242E\] {
+    border-bottom-color: var(--border-column-header);
+  }
+
+  /* 5. Custom Deep Scrollbars (track: #000000, thumb: #262A35, hover: #373C4B) */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+  }
+
+  /* 6. Strictly Scoped Mobile Responsiveness (< 768px only — Zero Desktop Impact) */
+  @media (max-width: 767.98px) {
+    [data-testid="top-kpi-ribbon"],
+    [data-testid="dashboard-3col-matrix"] {
+      grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    [data-testid="dashboard-3col-matrix"] > [data-testid^="matrix-card-"] {
+      grid-column: span 1 / span 1 !important;
+    }
+
+    /* Prevent iOS Safari from auto-zooming on input focus */
+    .aa-theme-shell input,
+    .aa-theme-shell textarea,
+    .aa-theme-shell select {
+      font-size: 16px !important;
+    }
+
+    .aa-theme-shell button[data-mobile-touch="true"],
+    .aa-theme-shell [data-testid^="mobile-edit-btn-"] {
+      min-height: 44px;
+    }
+
+    .aa-theme-shell .overflow-x-auto,
+    .aa-theme-shell .overflow-y-auto {
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+}
+

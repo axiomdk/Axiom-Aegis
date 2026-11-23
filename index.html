@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <script>
+      (function () {
+        var NativeWebSocket = window.WebSocket;
+        if (NativeWebSocket) {
+          var WrappedWebSocket = function (url, protocols) {
+            var isViteHmr =
+              protocols === 'vite-hmr' ||
+              (Array.isArray(protocols) && protocols.indexOf('vite-hmr') !== -1);
+            if (isViteHmr) {
+              var dummy = new EventTarget();
+              dummy.url = String(url || '');
+              dummy.readyState = 1;
+              dummy.protocol = 'vite-hmr';
+              dummy.extensions = '';
+              dummy.bufferedAmount = 0;
+              dummy.binaryType = 'blob';
+              dummy.send = function () {};
+              dummy.close = function () {
+                dummy.readyState = 3;
+              };
+              setTimeout(function () {
+                try {
+                  var ev = new Event('open');
+                  dummy.dispatchEvent(ev);
+                  if (typeof dummy.onopen === 'function') dummy.onopen(ev);
+                } catch (e) {}
+              }, 0);
+              return dummy;
+            }
+            return protocols !== undefined
+              ? new NativeWebSocket(url, protocols)
+              : new NativeWebSocket(url);
+          };
+          WrappedWebSocket.prototype = NativeWebSocket.prototype;
+          WrappedWebSocket.CONNECTING = 0;
+          WrappedWebSocket.OPEN = 1;
+          WrappedWebSocket.CLOSING = 2;
+          WrappedWebSocket.CLOSED = 3;
+          window.WebSocket = WrappedWebSocket;
+        }
+        window.addEventListener('error', function (event) {
+          if (
+            event &&
+            (event.message === 'ResizeObserver loop completed with undelivered notifications.' ||
+              event.message === 'ResizeObserver loop limit exceeded' ||
+              (typeof event.message === 'string' &&
+                event.message.indexOf('ResizeObserver') !== -1))
+          ) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            return true;
+          }
+        });
+        window.addEventListener('unhandledrejection', function (event) {
+          if (
+            event &&
+            event.reason &&
+            typeof event.reason.message === 'string' &&
+            (event.reason.message.indexOf('WebSocket') !== -1 ||
+              event.reason.message.indexOf('vite') !== -1)
+          ) {
+            event.preventDefault();
+          }
+        });
+      })();
+    </script>
+    <title>Axiom Aegis (AA) — v26.11.20</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
+    <link rel="shortcut icon" href="/Axiom-Aegis.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Axiom Aegis" />
+    <meta name="description" content="Axiom Aegis (AA) v26.11.20 — Cloud-Synced Multi-Device Executive Command Center & Personal Operations Matrix with Role & Rank Hierarchy, Master Admin Database Overseer, unified calendar & timeline, chores, daily notes, life statistics, distance, and funds & bills management." />
+    <meta property="og:title" content="Axiom Aegis (AA) — v26.11.20" />
+    <meta property="og:description" content="Axiom Aegis (AA) v26.11.20 — Cloud-Synced Multi-Device Executive Command Center & Personal Operations Matrix with Role & Rank Hierarchy, Master Admin Database Overseer, unified calendar & timeline, chores, daily notes, life statistics, distance, and funds & bills management." />
+    <meta property="og:image" content="/icon-512.png" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body class="bg-[#000000] text-[#F8FAFC]">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
